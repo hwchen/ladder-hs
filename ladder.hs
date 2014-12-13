@@ -3,8 +3,10 @@
 -- Get all AGA ratings from file "TDListN.txt"
 --(before Parsec)
 
+-- I need to check for players who do not have a rating, give them "0"
+
 data Player = Player { name   :: String
-                     , agaId     :: String
+                     , agaId  :: String
                      , rating :: String
                      , state  :: String
                      } deriving (Show)
@@ -31,3 +33,15 @@ parsePlayer s = Player { name = name'
               (_:_:_:_:x:xs) -> x
               _ -> "error"
           state' = last stringList
+
+filterByState :: String -> [Player] -> [Player]
+filterByState filterState = filter (\a -> state a == filterState)
+
+massPlayers :: IO [Player]
+massPlayers = do
+    allRatingsList <- agaList
+    return $ filterByState "MA" $ map parsePlayer allRatingsList
+
+main = do
+    players <- massPlayers
+    mapM_ print players
