@@ -7,7 +7,8 @@ Loads 2 files: AGA ratings and results list
 generates properly formatted text file with ratings
 
 Uses Parsec
-
+(work in progress... so far basic parse of aga list into
+list of records)
 
 ### Future (May be separate software project)
 - autogenerate html pages using pandoc, just from inputted results
