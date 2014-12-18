@@ -1,47 +1,12 @@
--- Program for processing AGA ratings
+-- main for ladder program. This program reads two files:
+-- results.txt
+-- ladder.txt
+-- and outputs to ladder.txt
 
--- Get all AGA ratings from file "TDListN.txt"
---(before Parsec)
+-- for now, LadderCalc is working. reading files and writing are not.
 
--- I need to check for players who do not have a rating, give them "0"
+module Main where
 
-data Player = Player { name   :: String
-                     , agaId  :: String
-                     , rating :: String
-                     , state  :: String
-                     } deriving (Show)
+import LadderCalc
 
-agaList :: IO [String]
-agaList = do
-    contents <- readFile "TDListN.txt"
-    return $ lines contents
-
-parsePlayer :: String -> Player
-parsePlayer s = Player { name = name'
-                       , agaId = agaId'
-                       , rating = rating'
-                       , state = state'
-                       }
-    where stringList = words s
-          name' = case stringList of
-              (x:y:xs) -> x ++ y
-              _ -> "error"
-          agaId' = case stringList of
-              (_:_:x:xs) -> x
-              _ -> "error"
-          rating' = case stringList of
-              (_:_:_:_:x:xs) -> x
-              _ -> "error"
-          state' = last stringList
-
-filterByState :: String -> [Player] -> [Player]
-filterByState filterState = filter (\a -> state a == filterState)
-
-massPlayers :: IO [Player]
-massPlayers = do
-    allRatingsList <- agaList
-    return $ filterByState "MA" $ map parsePlayer allRatingsList
-
-main = do
-    players <- massPlayers
-    mapM_ print players
+main = print $ ladder recList ladList
