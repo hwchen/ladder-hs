@@ -8,8 +8,8 @@ data Record = Game { white :: Player
                    , black :: Player 
                    , winner :: Winner
                    }
-                   | AddPlayer Player
-                   deriving Show
+              | AddPlayer Player
+              deriving Show
 
 data Winner = White | Black 
               deriving Show
@@ -26,9 +26,13 @@ applyRecord (Game w b Black) lad =
     (takeWhile (/= w) lad') ++ [b] ++ (dropWhile (/= w) lad')
         where lad' = filter (/= b) lad
 
---ladder function should be a fold, accumulater is a Ladder.
 ladder :: Records -> Ladder -> Ladder
 ladder rs lad = foldl' (flip applyRecord) lad rs
+
+pprintLadder :: Ladder -> IO()
+pprintLadder lad = do
+    let lad' = map (\(a,b) -> show a ++ ". " ++ b) $ zip [1..] lad
+    mapM_ putStrLn lad'
 
 -- test cases
 ladList = ["mawang","chunsun","willluff"]
