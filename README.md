@@ -10,6 +10,9 @@ Uses Parsec
 (work in progress... so far basic parse of aga list into
 list of records)
 
+### Calculate Ladder Standings
+Currently does calculation, but does not do IO.
+
 ### Future (May be separate software project)
 - autogenerate html pages using pandoc, just from inputted results
 - use database
