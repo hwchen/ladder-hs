@@ -11,7 +11,9 @@ toPandocArgs s = ["-o"] ++ [toHtml s] ++ [s]
 
 main = do
     args <- getArgs
-    print args
-    print $ map toPandocArgs args
+    putStrLn "Input: "
+    mapM_ putStrLn args
+    putStrLn "Output: "
+    mapM_ putStrLn $ map toHtml args
     mapM_ (rawSystem "pandoc") $ map toPandocArgs args
     --e.g. rawSystem "pandoc" ["-o", "index.html", "index.md"]
