@@ -26,8 +26,8 @@ applyRecord (Game w b Black) lad =
     (takeWhile (/= w) lad') ++ [b] ++ (dropWhile (/= w) lad')
         where lad' = filter (/= b) lad
 
-ladder :: Records -> Ladder -> Ladder
-ladder rs lad = foldl' (flip applyRecord) lad rs
+generateLadder :: Records -> Ladder -> Ladder
+generateLadder rs lad = foldl' (flip applyRecord) lad rs
 
 pprintLadder :: Ladder -> IO()
 pprintLadder lad = do

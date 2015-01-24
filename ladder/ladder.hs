@@ -9,4 +9,4 @@ module Main where
 
 import LadderCalc
 
-main = pprintLadder $ ladder recList ladList
+main = pprintLadder $ generateLadder recList ladList
